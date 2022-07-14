@@ -2,8 +2,6 @@ from urllib.request import Request, urlopen
 from threading import Thread
 import time
 import telebot
-import logging
-
 
 
 TOKEN = '5597549677:AAGUpfXnvhrJ_HllAQqZ8U8zKvII5YndNOE'
@@ -40,7 +38,7 @@ def check_page():
         else:
             time.sleep(100) 
 
-#Добавление пользователей в базу
+#Добавление пользователей в базу (текстовый файл)
 @bot.message_handler(commands=['start'])
 def start_message(message):
     print('вошел', message.from_user.id, message.from_user.first_name, message.from_user.last_name)
@@ -49,7 +47,7 @@ def start_message(message):
     f.write(str(message.chat.id) + '\n')
     f.close()
 
-#Включение в поток 
+#Включение в поток проверки страницы
 t1 = Thread(target = check_page, args =())
 t1.start()
 
